@@ -24,7 +24,7 @@ class MeanShift(object):
         # Every item is a centroid
         for i in range(len(data)):
             self.centroids[i] = data[i]
-        
+
         while True:
             new_centroids = []
 
@@ -37,7 +37,6 @@ class MeanShift(object):
                     # is in radius or not
                     if np.linalg.norm(features - curr_centroid) < self.bandwidth:
                         in_bandwidth.append(features)
-                        self.classification[i].append(features)
                 
                 new_centroid = np.average(in_bandwidth, axis=0)
                 new_centroids.append(tuple(new_centroid))
@@ -50,7 +49,7 @@ class MeanShift(object):
 
             for i in range(len(uniques)):
                 self.centroids[i] = np.array(uniques[i])
-            
+
             optimized = True
 
             for i in self.centroids:
@@ -58,7 +57,7 @@ class MeanShift(object):
                     optimized = False
                 if not optimized:
                     break
-            
+
             if optimized:
                 break
 
